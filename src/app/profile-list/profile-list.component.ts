@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation, ViewChild, ElementRef } from "@angular/core";
 import { MatTableDataSource, MatPaginator, MatSort } from "@angular/material";
-import { HttpClient } from "@angular/common/http";
 import { Subscription, fromEvent, merge } from "rxjs";
 import { debounceTime } from "rxjs/operators";
+import { Store } from "@ngrx/store";
 
+import { RootState } from "src/app/redux";
 import { Profile } from "src/models";
 
 @Component({
@@ -21,7 +22,7 @@ export class ProfileListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild("searchInput") searchInput: ElementRef<HTMLInputElement>;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private store: Store<RootState>) {}
 
   ngOnInit() {
     this.profileDataSource.paginator = this.paginator;
@@ -29,15 +30,15 @@ export class ProfileListComponent implements OnInit, OnDestroy {
     this.profileDataSource.sortingDataAccessor = this.sortingDataAccessor;
     this.profileDataSource.filterPredicate = this.filterPredicate;
 
-    const getData = this.httpClient
-      .get<Profile[]>("https://profiles-list.firebaseio.com/Data.json")
+    const getProfiles$ = this.store
+      .select(state => state.profiles)
       .forEach(profiles => (this.profileDataSource.data = profiles));
 
-    const t = fromEvent(this.searchInput.nativeElement, "input")
+    const input$ = fromEvent(this.searchInput.nativeElement, "input")
       .pipe(debounceTime(300))
       .forEach(e => (this.profileDataSource.filter = (e.target as HTMLInputElement).value));
 
-    this.subscription = merge(getData, t).subscribe();
+    this.subscription = merge(getProfiles$, input$).subscribe();
   }
 
   ngOnDestroy() {

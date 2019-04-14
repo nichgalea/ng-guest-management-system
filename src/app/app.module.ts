@@ -17,6 +17,8 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { ProfileListComponent } from "./profile-list/profile-list.component";
 import { LazyImageDirective } from "./lazy-image/lazy-image.directive";
+import { StoreModule } from "@ngrx/store";
+import { reducers, metaReducers } from "./redux";
 
 @NgModule({
   declarations: [AppComponent, ProfileListComponent, LazyImageDirective],
@@ -32,7 +34,8 @@ import { LazyImageDirective } from "./lazy-image/lazy-image.directive";
     MatPaginatorModule,
     HttpClientModule,
     CommonModule,
-    MatSortModule
+    MatSortModule,
+    StoreModule.forRoot(reducers, { metaReducers })
   ],
   providers: [],
   bootstrap: [AppComponent]
