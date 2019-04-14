@@ -22,7 +22,7 @@
     mat-form-field {
       background: white;
       color: black;
-      width: 80%;
+      width: 85%;
       font-size: 16px;
       line-height: 0.8;
       box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.5);
@@ -58,8 +58,42 @@
   .search-button {
     margin-left: 16px;
     height: 50px;
+    width: 72px;
     border-radius: 2px;
     background: #2076a2;
     color: white;
+  }
+}
+
+.profiles {
+  margin: 32px 16px 16px;
+
+  .profiles-table {
+    width: 100%;
+
+    th {
+      font-weight: bold;
+      color: black;
+    }
+
+    th:last-child,
+    td:last-child {
+      text-align: right;
+    }
+
+    td:last-child {
+      padding-right: 16px;
+    }
+  }
+
+  .profile-photo {
+    width: 32px;
+    height: 32px;
+    border-radius: 17px;
+    overflow: hidden;
+  }
+
+  .view-profile-icon {
+    color: lightgray;
   }
 }

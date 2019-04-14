@@ -8,7 +8,7 @@
       <form class="search-form" (submit)="submitSearch($event)">
         <mat-form-field floatLabel="never" appearance="filled">
           <mat-icon matPrefix class="search-icon" inline="true">search</mat-icon>
-          <input matInput placeholder="Search profiles" type="search" />
+          <input matInput placeholder="Search profiles" type="search" #searchInput />
         </mat-form-field>
 
         <button mat-flat-button class="search-button"><mat-icon>search</mat-icon></button>
@@ -16,3 +16,60 @@
     </mat-toolbar-row>
   </mat-toolbar>
 </header>
+
+<div class="profiles mat-elevation-z2">
+  <table class="profiles-table" mat-table [dataSource]="profileDataSource" matSort>
+    <ng-container matColumnDef="avatar">
+      <th mat-header-cell *matHeaderCellDef><mat-icon>account_circle</mat-icon></th>
+      <td mat-cell *matCellDef="let profile"><img lazy-img class="profile-photo" src="{{ profile.photo }}" /></td>
+    </ng-container>
+
+    <ng-container matColumnDef="localid">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Local ID</th>
+      <td mat-cell *matCellDef="let profile">{{ profile.localid }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email Address</th>
+      <td mat-cell *matCellDef="let profile">{{ profile.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fullname">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let profile">
+        {{ profile.prefix ? profile.prefix.substr(0, 3) + "." : "" }}
+        {{ profile.first_name }}
+        {{ profile.last_name }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone Number</th>
+      <td mat-cell *matCellDef="let profile">{{ profile.phone }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+      <td mat-cell *matCellDef="let profile">{{ profile.address }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="modified">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Modified</th>
+      <td mat-cell *matCellDef="let profile">{{ profile.modified | date: "yyyy-MM-dd" }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="view">
+      <th mat-header-cell *matHeaderCellDef>View</th>
+      <td mat-cell *matCellDef="let profile">
+        <a routerLink="/profiles/{{ profile.localid }}">
+          <mat-icon class="view-profile-icon">arrow_forward_ios</mat-icon>
+        </a>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
+</div>
