@@ -1,0 +1,18 @@
+<header class="profile-list-header">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <h1 class="profiles-title">Profiles</h1>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row>
+      <form class="search-form" (submit)="submitSearch($event)">
+        <mat-form-field floatLabel="never" appearance="filled">
+          <mat-icon matPrefix class="search-icon" inline="true">search</mat-icon>
+          <input matInput placeholder="Search profiles" type="search" />
+        </mat-form-field>
+
+        <button mat-flat-button class="search-button"><mat-icon>search</mat-icon></button>
+      </form>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</header>
