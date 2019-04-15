@@ -1,0 +1,46 @@
+<header class="profile-header">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <h1 class="profile-title">
+        Profile:
+
+        <ng-container *ngIf="profile; else spinner">
+          <img class="profile-photo" [src]="profile.photo" />
+          {{ profile.first_name }} {{ profile.last_name }}
+        </ng-container>
+
+        <ng-template #spinner>
+          <mat-progress-spinner
+            class="profile-loading"
+            diameter="60"
+            color="accent"
+            mode="indeterminate"
+          ></mat-progress-spinner>
+        </ng-template>
+      </h1>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row>
+      <nav class="profile-tabs" mat-tab-nav-bar color="accent">
+        <a
+          *ngFor="let route of profileTabsRoutes"
+          [routerLink]="route.path"
+          [active]="rla.isActive"
+          mat-tab-link
+          routerLinkActive
+          #rla="routerLinkActive"
+        >
+          {{ route.label }}
+        </a>
+      </nav>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</header>
+
+<div class="profile-main-content">
+  <app-quick-facts class="mat-elevation-z2"></app-quick-facts>
+
+  <div class="profile-tab-content mat-elevation-z2">
+    <router-outlet></router-outlet>
+  </div>
+</div>

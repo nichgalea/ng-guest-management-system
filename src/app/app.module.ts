@@ -12,16 +12,17 @@ import {
 } from "@angular/material";
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
+import { StoreModule } from "@ngrx/store";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { ProfileListComponent } from "./profile-list/profile-list.component";
 import { LazyImageDirective } from "./lazy-image/lazy-image.directive";
-import { StoreModule } from "@ngrx/store";
 import { reducers, metaReducers } from "./redux";
+import { ProfileModule } from "./profile/profile.module";
 
 @NgModule({
-  declarations: [AppComponent, ProfileListComponent, LazyImageDirective],
+  declarations: [AppComponent, LazyImageDirective, ProfileListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -35,6 +36,7 @@ import { reducers, metaReducers } from "./redux";
     HttpClientModule,
     CommonModule,
     MatSortModule,
+    ProfileModule,
     StoreModule.forRoot(reducers, { metaReducers })
   ],
   providers: [],

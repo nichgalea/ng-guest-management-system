@@ -1,0 +1,50 @@
+<div class="container">
+  <h2>Profile Detail</h2>
+
+  <table *ngIf="profile; else loading" class="mat-elevation-z2">
+    <tbody>
+      <tr>
+        <td>Prefix</td>
+        <td>{{ profile.prefix }}</td>
+      </tr>
+      <tr>
+        <td>First name</td>
+        <td>{{ profile.first_name }}</td>
+      </tr>
+      <tr>
+        <td>Last name</td>
+        <td>{{ profile.last_name }}</td>
+      </tr>
+      <tr>
+        <td>Suffix</td>
+        <td>{{ profile.suffix ? profile.suffix : "-" }}</td>
+      </tr>
+      <tr>
+        <td>Loyalty Member ID</td>
+        <td>{{ profile.loyalty_member_id }}</td>
+      </tr>
+      <tr>
+        <td>Phone</td>
+        <td>{{ profile.phone }}</td>
+      </tr>
+      <tr>
+        <td>Address</td>
+        <td>{{ profile.address }}</td>
+      </tr>
+      <tr>
+        <td>Birthdate</td>
+        <td>{{ profile.birthdate | date: "yyyy-MM-dd" }}</td>
+      </tr>
+      <tr>
+        <td>Language Preference</td>
+        <td>{{ profile.language ? profile.language : "-" }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #loading>
+    <div class="loading">
+      <mat-progress-spinner diameter="60" color="primary" mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </ng-template>
+</div>

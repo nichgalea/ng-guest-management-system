@@ -1,0 +1,56 @@
+:host {
+  position: relative;
+  display: flex;
+  padding: 12px 8px 8px;
+  height: 100%;
+}
+
+.container {
+  height: calc(100% - 52px);
+  width: 100%;
+  background: #fafafa;
+  padding: 16px 8px;
+  border: 2px solid darken(#fafafa, 5%);
+}
+
+h2 {
+  font-weight: normal;
+  margin: 0 0 16px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12px;
+
+  tr {
+    &:not(:last-child) {
+      td {
+        border-bottom: 1px solid lightgray;
+
+        &:first-child {
+          width: 160px;
+        }
+      }
+    }
+
+    td {
+      padding: 10px 8px;
+
+      &:first-child {
+        color: gray;
+      }
+
+      &:not(:first-child) {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
