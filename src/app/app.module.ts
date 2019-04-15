@@ -9,7 +9,8 @@ import {
   MatIconModule,
   MatTableModule,
   MatPaginatorModule,
-  MatSortModule
+  MatSortModule,
+  MatDialogModule
 } from "@angular/material";
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
@@ -21,9 +22,11 @@ import { ProfileListComponent } from "./profile-list/profile-list.component";
 import { LazyImageDirective } from "./lazy-image/lazy-image.directive";
 import { reducers, metaReducers } from "./redux";
 import { ProfileModule } from "./profile/profile.module";
+import { ErrorDialogComponent } from "./error-dialog/error-dialog.component";
 
 @NgModule({
-  declarations: [AppComponent, LazyImageDirective, ProfileListComponent],
+  entryComponents: [ErrorDialogComponent],
+  declarations: [AppComponent, LazyImageDirective, ProfileListComponent, ErrorDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -39,6 +42,7 @@ import { ProfileModule } from "./profile/profile.module";
     MatSortModule,
     ProfileModule,
     FormsModule,
+    MatDialogModule,
     StoreModule.forRoot(reducers, { metaReducers })
   ],
   providers: [],

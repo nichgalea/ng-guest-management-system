@@ -16,7 +16,7 @@ import { Profile } from "src/models";
 export class ProfileListComponent implements OnInit, OnDestroy {
   private subscription$$: Subscription;
   private displayedColumns = ["avatar", "localid", "email", "fullname", "phone", "address", "modified", "view"];
-  private profileDataSource = new MatTableDataSource<Profile>();
+  private profileDataSource = new MatTableDataSource<Profile>([]);
   private filter = "";
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
