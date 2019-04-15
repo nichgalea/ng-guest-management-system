@@ -14,9 +14,10 @@ import { Profile } from "src/models";
   encapsulation: ViewEncapsulation.None
 })
 export class ProfileListComponent implements OnInit, OnDestroy {
-  private subscription: Subscription;
+  private subscription$$: Subscription;
   private displayedColumns = ["avatar", "localid", "email", "fullname", "phone", "address", "modified", "view"];
   private profileDataSource = new MatTableDataSource<Profile>();
+  private filter = "";
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -30,23 +31,13 @@ export class ProfileListComponent implements OnInit, OnDestroy {
     this.profileDataSource.sortingDataAccessor = this.sortingDataAccessor;
     this.profileDataSource.filterPredicate = this.filterPredicate;
 
-    const getProfiles$ = this.store
+    this.subscription$$ = this.store
       .select(state => state.profiles)
-      .forEach(profiles => (this.profileDataSource.data = profiles));
-
-    const input$ = fromEvent(this.searchInput.nativeElement, "input")
-      .pipe(debounceTime(300))
-      .forEach(e => (this.profileDataSource.filter = (e.target as HTMLInputElement).value));
-
-    this.subscription = merge(getProfiles$, input$).subscribe();
+      .subscribe(profiles => (this.profileDataSource.data = profiles));
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
-  submitSearch(e) {
-    e.preventDefault();
+    this.subscription$$.unsubscribe();
   }
 
   sortingDataAccessor(profile: Profile, headerId: string): string {
@@ -63,5 +54,14 @@ export class ProfileListComponent implements OnInit, OnDestroy {
     const profileDataLower = `${profile.first_name} ${profile.last_name} ${profile.email}`.toLowerCase();
 
     return profileDataLower.indexOf(filterLower) !== -1;
+  }
+
+  search() {
+    this.profileDataSource.filter = this.filter;
+  }
+
+  cancelSearch() {
+    this.filter = "";
+    this.profileDataSource.filter = "";
   }
 }

@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
   MatButtonModule,
@@ -37,6 +38,7 @@ import { ProfileModule } from "./profile/profile.module";
     CommonModule,
     MatSortModule,
     ProfileModule,
+    FormsModule,
     StoreModule.forRoot(reducers, { metaReducers })
   ],
   providers: [],

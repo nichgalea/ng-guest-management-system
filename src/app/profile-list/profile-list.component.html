@@ -5,14 +5,33 @@
     </mat-toolbar-row>
 
     <mat-toolbar-row>
-      <form class="search-form" (submit)="submitSearch($event)">
+      <div class="search-container">
         <mat-form-field floatLabel="never" appearance="filled">
           <mat-icon matPrefix class="search-icon" inline="true">search</mat-icon>
-          <input matInput placeholder="Search profiles" type="search" #searchInput />
+          <input
+            name="search"
+            matInput
+            placeholder="Search profiles"
+            type="search"
+            #searchInput
+            [(ngModel)]="filter"
+            autocomplete="off"
+          />
         </mat-form-field>
 
-        <button mat-flat-button class="search-button"><mat-icon>search</mat-icon></button>
-      </form>
+        <button mat-flat-button class="search-button" (click)="search()"><mat-icon>search</mat-icon></button>
+
+        <button
+          mat-flat-button
+          color="accent"
+          class="cancel-search-button"
+          title="Cancel Search"
+          (click)="cancelSearch()"
+          *ngIf="filter"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
     </mat-toolbar-row>
   </mat-toolbar>
 </header>
