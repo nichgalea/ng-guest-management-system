@@ -76,6 +76,11 @@
 .profiles {
   margin: 32px 16px 16px;
 
+  .no-results {
+    padding: 16px;
+    color: gray;
+  }
+
   .profiles-table {
     width: 100%;
 

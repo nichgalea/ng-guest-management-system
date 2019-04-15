@@ -37,6 +37,12 @@
 </header>
 
 <div class="profiles mat-elevation-z2">
+  <p *ngIf="profileDataSource.filteredData.length === 0 && filter" class="no-results">
+    <i>
+      There doesn't seem to be any records that match your search criteria.
+    </i>
+  </p>
+
   <table class="profiles-table" mat-table [dataSource]="profileDataSource" matSort>
     <ng-container matColumnDef="avatar">
       <th mat-header-cell *matHeaderCellDef><mat-icon>account_circle</mat-icon></th>
